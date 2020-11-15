@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from lines.models import Script
+from lines.serializers import ScriptSerializer
+
+
+class ScriptsViewSet(viewsets.ModelViewSet):
+
+    queryset = Script.objects.all()
+    serializer_class = ScriptSerializer
