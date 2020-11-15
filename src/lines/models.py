@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Script(models.Model):
-    scriptName = models.CharField(max_length=100)
+    script_name = models.CharField(max_length=100)
     writer = models.CharField(max_length=100)
 
 
@@ -11,8 +11,8 @@ class Line(models.Model):
     script = models.ForeignKey(Script, related_name="lines", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     cue = models.TextField()
-    id = models.CharField(max_length=36, primary_key=True)
-    shouldPlay = models.BooleanField()
+    line_id = models.CharField(max_length=36)
+    should_play = models.BooleanField()
 
     class Meta:
         ordering = ["created"]
