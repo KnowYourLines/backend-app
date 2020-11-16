@@ -7,12 +7,12 @@ class Script(models.Model):
 
 
 class Line(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
     script = models.ForeignKey(Script, related_name="lines", on_delete=models.CASCADE)
+    order = models.IntegerField()
     name = models.CharField(max_length=100)
     cue = models.TextField()
     line_id = models.CharField(max_length=36)
     should_play = models.BooleanField()
 
     class Meta:
-        ordering = ["created"]
+        ordering = ["order"]

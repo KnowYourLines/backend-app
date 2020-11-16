@@ -7,7 +7,7 @@ from lines.models import Script, Line
 class LineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Line
-        fields = ["name", "cue", "line_id", "should_play"]
+        fields = ["name", "cue", "line_id", "should_play", "order"]
 
 
 class ScriptSerializer(serializers.ModelSerializer):
@@ -39,6 +39,7 @@ class ScriptSerializer(serializers.ModelSerializer):
                 )
                 current_line.name = line.get("name")
                 current_line.cue = line.get("cue")
+                current_line.order = line.get("order")
                 current_line.should_play = line.get("should_play")
                 current_line.save()
             except ObjectDoesNotExist:
