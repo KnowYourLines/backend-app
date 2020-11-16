@@ -4,6 +4,9 @@ from django.db import models
 class Script(models.Model):
     script_name = models.CharField(max_length=100)
     writer = models.CharField(max_length=100)
+    owner = models.ForeignKey(
+        "auth.User", related_name="scripts", on_delete=models.CASCADE
+    )
 
 
 class Line(models.Model):

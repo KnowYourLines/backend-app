@@ -1,7 +1,18 @@
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
 from lines.models import Script, Line
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    scripts = serializers.HyperlinkedRelatedField(
+        many=True, view_name="script-detail", read_only=True
+    )
+
+    class Meta:
+        model = User
+        fields = ["url", "id", "username", "scripts"]
 
 
 class LineSerializer(serializers.ModelSerializer):
@@ -11,11 +22,12 @@ class LineSerializer(serializers.ModelSerializer):
 
 
 class ScriptSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source="owner.username")
     lines = LineSerializer(many=True)
 
     class Meta:
         model = Script
-        fields = ["script_name", "writer", "lines"]
+        fields = ["script_name", "writer", "owner", "lines"]
 
     def create(self, validated_data):
         lines_data = validated_data.pop("lines")
