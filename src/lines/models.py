@@ -10,7 +10,7 @@ class Line(models.Model):
     script = models.ForeignKey(Script, related_name="lines", on_delete=models.CASCADE)
     order = models.IntegerField()
     name = models.CharField(max_length=100)
-    cue = models.TextField()
+    cue = models.TextField(blank=True)
     line_id = models.CharField(max_length=36)
     should_play = models.BooleanField()
 
