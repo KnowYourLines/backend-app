@@ -5,3 +5,4 @@ drf-registration
 django-environ
 boto3
 dj-database-url
+gunicorn
