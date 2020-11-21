@@ -8,9 +8,10 @@ from botocore.exceptions import ClientError
 
 def presigned_upload_url(file_name):
     S3_BUCKET = os.environ.get("S3_BUCKET")
+    S3_REGION = os.environ.get("S3_REGION")
 
     s3 = boto3.client(
-        "s3", config=Config(region_name="eu-west-2", signature_version="s3v4")
+        "s3", config=Config(region_name=S3_REGION, signature_version="s3v4")
     )
 
     presigned_post = s3.generate_presigned_post(
@@ -36,9 +37,10 @@ def presigned_download_url(object_name, expiration=604800):
     """
 
     bucket_name = os.environ.get("S3_BUCKET")
+    region = os.environ.get("S3_REGION")
     # Generate a presigned URL for the S3 object
     s3_client = boto3.client(
-        "s3", config=Config(region_name="eu-west-2", signature_version="s3v4")
+        "s3", config=Config(region_name=region, signature_version="s3v4")
     )
     try:
         url = s3_client.generate_presigned_url(

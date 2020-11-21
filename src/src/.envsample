@@ -5,5 +5,6 @@ EMAIL_HOST_USER=somelongstring
 EMAIL_HOST_PASSWORD=someevenlongerstring
 DEFAULT_FROM_EMAIL=test@example.com
 S3_BUCKET=some-bucket-name
+S3_REGION=eu-west-2
 AWS_ACCESS_KEY_ID=somelongstringformybucket
 AWS_SECRET_ACCESS_KEY=someevenlongerstringformybucket
