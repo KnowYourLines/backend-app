@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
+from lines.helpers import presigned_download_url
 from lines.models import Script, Line
 
 
@@ -16,9 +17,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class LineSerializer(serializers.ModelSerializer):
+    download_url = serializers.URLField(read_only=True)
+
     class Meta:
         model = Line
-        fields = ["name", "cue", "line_id", "should_play", "order"]
+        fields = ["name", "cue", "line_id", "should_play", "order", "download_url"]
+
+    def to_representation(self, instance):
+        instance.download_url = presigned_download_url(instance.line_id + ".wav")
+        return super().to_representation(instance)
 
 
 class ScriptSerializer(serializers.ModelSerializer):
