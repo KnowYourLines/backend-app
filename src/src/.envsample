@@ -8,3 +8,4 @@ S3_BUCKET=some-bucket-name
 S3_REGION=eu-west-2
 AWS_ACCESS_KEY_ID=somelongstringformybucket
 AWS_SECRET_ACCESS_KEY=someevenlongerstringformybucket
+DATABASE_URL=sqlite:///db.sqlite3
