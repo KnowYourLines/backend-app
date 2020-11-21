@@ -6,6 +6,15 @@ from lines.helpers import presigned_download_url
 from lines.models import Script, Line
 
 
+class UploadSerializer(serializers.Serializer):
+    url = serializers.URLField()
+    data = serializers.JSONField()
+
+
+class UploadParamSerializer(serializers.Serializer):
+    object_name = serializers.CharField()
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     scripts = serializers.HyperlinkedRelatedField(
         many=True, view_name="script-detail", read_only=True
