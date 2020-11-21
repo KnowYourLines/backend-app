@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 import dj_database_url
+import django_heroku
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -92,7 +93,6 @@ WSGI_APPLICATION = "src.wsgi.application"
 # }
 DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -166,3 +166,6 @@ EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+django_heroku.settings(locals())
+del DATABASES["default"]["OPTIONS"]["sslmode"]
