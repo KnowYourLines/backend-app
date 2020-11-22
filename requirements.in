@@ -7,3 +7,4 @@ boto3
 dj-database-url
 gunicorn
 django-heroku
+django-cors-headers
