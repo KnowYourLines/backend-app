@@ -9,4 +9,4 @@ S3_REGION=eu-west-2
 AWS_ACCESS_KEY_ID=somelongstringformybucket
 AWS_SECRET_ACCESS_KEY=someevenlongerstringformybucket
 DATABASE_URL=sqlite:///db.sqlite3
-CORS_ORIGIN_WHITELIST=https://localhost:8080
+CORS_ORIGIN_WHITELIST='["https://localhost:8080"]'
