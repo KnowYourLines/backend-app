@@ -7,8 +7,7 @@ from lines.models import Script, Line
 
 
 class UploadSerializer(serializers.Serializer):
-    url = serializers.URLField()
-    data = serializers.JSONField()
+    s3_request = serializers.JSONField()
 
 
 class UploadParamSerializer(serializers.Serializer):
