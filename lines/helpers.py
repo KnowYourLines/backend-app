@@ -17,8 +17,8 @@ def presigned_upload_url(file_name):
     presigned_post = s3.generate_presigned_post(
         Bucket=S3_BUCKET,
         Key=file_name,
-        Fields={"acl": "public-read", "Content-Type": "audio/wav"},
-        Conditions=[{"acl": "public-read"}, {"Content-Type": "audio/wav"}],
+        Fields={"acl": "private", "Content-Type": "audio/wav"},
+        Conditions=[{"acl": "private"}, {"Content-Type": "audio/wav"}],
         ExpiresIn=3600,
     )
 
