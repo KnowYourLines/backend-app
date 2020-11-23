@@ -33,7 +33,7 @@ class LineSerializer(serializers.ModelSerializer):
         fields = ["name", "cue", "line_id", "should_play", "order", "download_url"]
 
     def to_representation(self, instance):
-        instance.download_url = presigned_download_url(instance.line_id + ".wav")
+        instance.download_url = presigned_download_url(instance.line_id)
         return super().to_representation(instance)
 
 
