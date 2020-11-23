@@ -12,7 +12,13 @@ from lines.serializers import (
 )
 
 
-class ScriptsViewSet(viewsets.ModelViewSet):
+class ScriptsViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
 
     queryset = Script.objects.all()
     serializer_class = ScriptSerializer
