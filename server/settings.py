@@ -171,5 +171,7 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
 
+LOGIN_URL = env("FRONTEND_URL")
+
 django_heroku.settings(locals())
 del DATABASES["default"]["OPTIONS"]["sslmode"]
