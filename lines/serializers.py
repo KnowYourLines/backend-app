@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
@@ -12,16 +11,6 @@ class UploadSerializer(serializers.Serializer):
 
 class UploadParamSerializer(serializers.Serializer):
     object_name = serializers.CharField()
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    scripts = serializers.HyperlinkedRelatedField(
-        many=True, view_name="script-detail", read_only=True
-    )
-
-    class Meta:
-        model = User
-        fields = ["url", "id", "username", "scripts"]
 
 
 class LineSerializer(serializers.ModelSerializer):

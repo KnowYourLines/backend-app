@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions, mixins
 
 from lines.helpers import presigned_upload_url
@@ -6,15 +5,14 @@ from lines.models import Script
 from lines.permissions import IsOwner
 from lines.serializers import (
     ScriptSerializer,
-    UserSerializer,
     UploadSerializer,
     UploadParamSerializer,
 )
 
 
 class ScriptsViewSet(
+    mixins.ListModelMixin,
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
     viewsets.GenericViewSet,
@@ -27,15 +25,8 @@ class ScriptsViewSet(
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions.
-    """
-
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        return super().get_queryset().filter(owner=self.request.user)
 
 
 class GetUploadUrlViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
