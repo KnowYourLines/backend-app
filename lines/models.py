@@ -16,6 +16,7 @@ class Line(models.Model):
     cue = models.TextField(blank=True)
     line_id = models.CharField(max_length=36)
     should_play = models.BooleanField()
+    uploaded = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["order"]

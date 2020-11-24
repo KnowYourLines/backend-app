@@ -18,7 +18,15 @@ class LineSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Line
-        fields = ["name", "cue", "line_id", "should_play", "order", "download_url"]
+        fields = [
+            "name",
+            "cue",
+            "line_id",
+            "should_play",
+            "order",
+            "download_url",
+            "uploaded",
+        ]
 
     def to_representation(self, instance):
         instance.download_url = presigned_download_url(instance.line_id)
@@ -57,6 +65,7 @@ class ScriptSerializer(serializers.ModelSerializer):
                 current_line.cue = line.get("cue")
                 current_line.order = line.get("order")
                 current_line.should_play = line.get("should_play")
+                current_line.uploaded = line.get("uploaded")
                 current_line.save()
             except ObjectDoesNotExist:
                 Line.objects.create(script=instance, **line)
