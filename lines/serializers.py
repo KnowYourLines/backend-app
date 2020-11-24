@@ -31,7 +31,7 @@ class ScriptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Script
-        fields = ["script_name", "writer", "owner", "lines"]
+        fields = ["id", "script_name", "writer", "owner", "lines"]
 
     def create(self, validated_data):
         lines_data = validated_data.pop("lines")
