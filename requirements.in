@@ -7,3 +7,7 @@ dj-database-url
 gunicorn
 django-heroku
 django-cors-headers
+cryptography
+pyjwt
+drf-jwt
+requests
