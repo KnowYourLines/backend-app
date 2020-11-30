@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
-    "drf_registration",
     "lines.apps.LinesConfig",
 ]
 
@@ -140,31 +139,12 @@ REST_FRAMEWORK = {
         "djangorestframework_camel_case.parser.CamelCaseJSONParser",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        # "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ],
 }
 
-DRF_REGISTRATION = {
-    "USER_ACTIVATE_TOKEN_ENABLED": True,
-}
-
-AUTH_USER_MODEL = "auth.User"
-
-AUTHENTICATION_BACKENDS = [
-    "drf_registration.auth.MultiFieldsModelBackend",
-]
-
-EMAIL_USE_TLS = env("EMAIL_USE_TLS")
-EMAIL_PORT = env("EMAIL_PORT")
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
-
 CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
-
-LOGIN_URL = env("FRONTEND_URL")
 
 django_heroku.settings(locals())
 del DATABASES["default"]["OPTIONS"]["sslmode"]

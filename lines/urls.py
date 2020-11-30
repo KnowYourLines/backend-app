@@ -10,5 +10,4 @@ router.register(r"get_upload_url", views.GetUploadUrlViewSet, basename="get_uplo
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("accounts/", include("drf_registration.urls")),
 ]

@@ -1,7 +1,6 @@
 Django<4
 djangorestframework<4
 djangorestframework-camel-case
-drf-registration
 django-environ
 boto3
 dj-database-url
