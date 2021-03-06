@@ -44,8 +44,8 @@ class ScriptSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         lines_data = validated_data.pop("lines")
         script = Script.objects.create(**validated_data)
-        for line in lines_data:
-            Line.objects.create(script=script, **line)
+        new_lines = [Line(script=script, **line) for line in lines_data]
+        Line.objects.bulk_create(new_lines, ignore_conflicts=True)
         return script
 
     def update(self, instance, validated_data):
@@ -69,7 +69,5 @@ class ScriptSerializer(serializers.ModelSerializer):
                 current_line.save()
             except ObjectDoesNotExist:
                 Line.objects.create(script=instance, **line)
-        for field in validated_data.keys():
-            setattr(instance, field, validated_data.get(field))
         instance.save()
         return instance
