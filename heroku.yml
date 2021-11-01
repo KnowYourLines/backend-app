@@ -1,0 +1,30 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+  config:
+    SECRET_KEY: change-me-to-50-secret-characters
+    DEBUG: True
+    LOCAL: False
+    CORS_ALLOWED_ORIGINS: frontend
+    DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres
+    EMAIL_USE_TLS: True
+    EMAIL_PORT: 56756
+    EMAIL_HOST: email-smtp.us-east-2.amazonaws.com
+    EMAIL_HOST_USER: AKIASNOXASPSTB5IZSD7
+    EMAIL_HOST_PASSWORD: BDVTPHUSM00bY+0UKl7QW8xdbilOitdAQqX8s6RBnK/0
+    DEFAULT_FROM_EMAIL: example@test.com
+    S3_BUCKET: some-name
+    S3_REGION: eu-west-2
+    AWS_ACCESS_KEY_ID: shush
+    AWS_SECRET_ACCESS_KEY: secret
+    FRONTEND_URL: frontend
+build:
+  docker:
+    web: Dockerfile
+release:
+  image: web
+  command:
+    - python manage.py makemigrations api; python manage.py migrate
+run:
+  web: gunicorn server.wsgi
