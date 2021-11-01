@@ -32,3 +32,4 @@ services:
       - AWS_ACCESS_KEY_ID=somelongstringformybucket
       - AWS_SECRET_ACCESS_KEY=someevenlongerstringformybucket
       - FRONTEND_URL=https://localhost:8080
+      - ALLOWED_HOSTS=localhost,127.0.0.1
