@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py makemigrations api; python manage.py migrate; python manage.py runserver 0.0.0.0:8000'
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - SECRET_KEY=somethingsecret
+      - LOCAL=True
+      - DEBUG=True
+      - EMAIL_USE_TLS=True
+      - EMAIL_PORT=777
+      - EMAIL_HOST=smtp.email.server.com
+      - EMAIL_HOST_USER=somelongstring
+      - EMAIL_HOST_PASSWORD=someevenlongerstring
+      - DEFAULT_FROM_EMAIL=test@example.com
+      - S3_BUCKET=some-bucket-name
+      - S3_REGION=eu-west-2
+      - AWS_ACCESS_KEY_ID=somelongstringformybucket
+      - AWS_SECRET_ACCESS_KEY=someevenlongerstringformybucket
+      - FRONTEND_URL=https://localhost:8080
