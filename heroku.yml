@@ -19,6 +19,7 @@ setup:
     AWS_ACCESS_KEY_ID: shush
     AWS_SECRET_ACCESS_KEY: secret
     FRONTEND_URL: frontend
+    ALLOWED_HOSTS: backend
 build:
   docker:
     web: Dockerfile
