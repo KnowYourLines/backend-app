@@ -65,7 +65,7 @@ class ScriptSerializer(serializers.ModelSerializer):
                     "cue": line.get("cue"),
                     "order": line.get("order"),
                     "should_play": line.get("should_play"),
-                    "uplooaded": line.get("uploaded"),
+                    "uploaded": line.get("uploaded"),
                 },
             )
         instance.save()
