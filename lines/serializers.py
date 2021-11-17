@@ -57,17 +57,16 @@ class ScriptSerializer(serializers.ModelSerializer):
         for extra_id in set(all_stored_line_ids) - set(line_ids):
             Line.objects.filter(line_id=extra_id).delete()
         for line in lines:
-            try:
-                current_line = Line.objects.get(
-                    script=instance, line_id=line.get("line_id")
-                )
-                current_line.name = line.get("name")
-                current_line.cue = line.get("cue")
-                current_line.order = line.get("order")
-                current_line.should_play = line.get("should_play")
-                current_line.uploaded = line.get("uploaded")
-                current_line.save()
-            except ObjectDoesNotExist:
-                Line.objects.create(script=instance, **line)
+            Line.objects.update_or_create(
+                script=instance,
+                line_id=line.get("line_id"),
+                defaults={
+                    "name": line.get("name"),
+                    "cue": line.get("cue"),
+                    "order": line.get("order"),
+                    "should_play": line.get("should_play"),
+                    "uplooaded": line.get("uploaded"),
+                },
+            )
         instance.save()
         return instance
